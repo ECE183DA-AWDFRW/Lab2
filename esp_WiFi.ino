@@ -1,4 +1,5 @@
 #include <ESP8266WiFi.h>
+#include <Servo.h>
 WiFiServer server(80); //Initialize the server on Port 80
 const short int LED_PIN = 16;//GPIO16
 const int trigPin = D4;  //D4
@@ -6,10 +7,13 @@ const int echoPin = D5;  //D5
 // defines variables
 long duration;
 int distance;
-int frequency; //Specified in Hz
-int buzzPin=D6; 
+double frequency; //Specified in Hz
+int speaker_pin = D6; 
+Servo servo;
 
 void freePlay(int timeRemaining) {
+  servo.write(90);
+  delay(500);
   while (timeRemaining > 0){
     // Clears the trigPin
     digitalWrite(trigPin, LOW);
@@ -22,17 +26,16 @@ void freePlay(int timeRemaining) {
     
     // Reads the echoPin, returns the sound wave travel time in microseconds
     duration = pulseIn(echoPin, HIGH);
-    
-    // Calculating the distance
-    distance = duration*0.034/2;
-    // Prints the distance on the Serial Monitor
-    Serial.print("Distance: ");
-    Serial.println(distance);
-    frequency = (-38*distance)+2038;
-    tone(buzzPin, frequency);
-    delay(30);
-    timeRemaining = timeRemaining - 30;
+    Serial.print("Duration: ");
+    Serial.println(duration);
+    frequency = (-1.143*duration)+2114;
+    frequency = int(frequency);
+    tone(speaker_pin, frequency);
+    delay(20);
+    timeRemaining = timeRemaining - 20;
   }
+  servo.write(0);
+  delay(500);
 }
 
 void setup() {
@@ -48,11 +51,14 @@ void setup() {
   Serial.println(HTTPS_ServerIP);
   pinMode(LED_PIN, OUTPUT); //GPIO16 is an OUTPUT pin;
   digitalWrite(LED_PIN, HIGH); //Initial state is OFF
+  servo.attach(D3);
+  servo.write(0);
+  delay(500);
 }
 
 
 void loop() {
-   noTone(buzzPin);
+   noTone(speaker_pin);
    digitalWrite(LED_PIN, HIGH);
    WiFiClient client = server.available();
    if (!client) {
@@ -70,63 +76,63 @@ void loop() {
 
    //Play for 10s based off distance
    if (request.indexOf("/10") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     freePlay(5000);
-     noTone(buzzPin); 
+     freePlay(10000);
+     noTone(speaker_pin); 
    }
    //Play for 20s based off distance
    else if (request.indexOf("/20") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
      freePlay(20000);
-     noTone(buzzPin); 
+     noTone(speaker_pin); 
    }
    //Play for 30s based off distance
    else if (request.indexOf("/30") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
      freePlay(30000);
-     noTone(buzzPin); 
+     noTone(speaker_pin); 
    }
    //Play a note
    else if (request.indexOf("/C") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 523, 1000);
+     tone(speaker_pin, 523);
    }
    else if (request.indexOf("/D") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 587, 1000);
+     tone(speaker_pin, 587);
    }
    else if (request.indexOf("/E") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 659, 1000);
+     tone(speaker_pin, 659);
    }
    else if (request.indexOf("/F") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 698, 1000);
+     tone(speaker_pin, 698);
    }
    else if (request.indexOf("/G") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 784, 1000);
+     tone(speaker_pin, 784);
    }
    else if (request.indexOf("/A") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 880);
+     tone(speaker_pin, 880);
    }
    else if (request.indexOf("/B") != -1){
-     noTone(buzzPin);
+     noTone(speaker_pin);
      digitalWrite(LED_PIN, LOW);
-     tone(buzzPin, 988, 1000);
+     tone(speaker_pin, 988);
    }
    delay(1000);
-   noTone(buzzPin); 
+   noTone(speaker_pin); 
    // Prepare the HTML document to respond and add buttons:
    String s = "HTTP/1.1 200 OK\r\n";
    s += "Content-Type: text/html\r\n\r\n";
