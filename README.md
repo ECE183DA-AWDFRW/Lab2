@@ -27,7 +27,7 @@ Picture of the Complete Setup:
 
 We first set up the web server using the microcontroller, making sure that the interaction with the server and microcontroller was functioning. We then set up the duration and note buttons on the web server to allow the user to choose how long they want to perform for or which note to play. After confirming that the server worked, we coded the distance sensor to read distances. Human interaction with the distance sensor would generate the duration of the echo. These durations were then transformed using the linear equation below, which were then used as the frequency for the speaker.
 
-frequency = (-1.143*duration)+2114
+**Frequency = (-1.143*Duration)+2114**
 
 
 Picture of the Distance Sensor MCU:
