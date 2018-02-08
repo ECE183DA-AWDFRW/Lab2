@@ -6,7 +6,7 @@ By Ryan Wang, Arnold Woo, and Daniel Fong
 
 # Introduction
 
-In this lab, our team created a “music band” consisting of two robots that played sound and interacted with each other to create harmony. A web server created by one of the robots will allow a user to choose the duration of the song. Once a duration is chosen, one robot uses a distance sensor and speaker, which changes the speaker’s pitch based on how far away a human hand was from the distance sensor. The robot that received the signal to start will signal to the second robot via IR sensor to start moving it’s motor in a steady motion, creating a steady drum beat. Once the duration has ended, the first robot will signal to the other robot to stop and the music will end.
+In this lab, our team created a “music band” consisting of two robots that played sound and interacted with each other to create harmony. A web server created by one of the robots will allow a user to choose the duration of the song, known as "free play" mode. Once a duration is chosen, one robot uses a distance sensor and speaker, which changes the speaker’s pitch based on how far away a human hand was from the distance sensor. The robot that received the signal to start will signal to the second robot via IR sensor to start moving it’s motor in a steady motion, creating a steady drum beat. Once the duration has ended, the first robot will signal to the other robot to stop and the music will end. The user can also press buttons through the web app to play specific tones.
 
 
 # Methods
