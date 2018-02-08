@@ -30,6 +30,9 @@ We first set up the web server using the microcontroller, making sure that the i
 **Frequency = (-1.143*Duration)+2114**
 
 
+![graph](https://user-images.githubusercontent.com/36172219/35957437-69ab7cd2-0c50-11e8-846d-2b71b3223217.png)
+
+
 Picture of the Distance Sensor MCU:
 ![distance sensor](https://user-images.githubusercontent.com/36172219/35955974-ad1e2b76-0c47-11e8-9a70-e22d8a0e2edd.jpg)
 
