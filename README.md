@@ -12,4 +12,6 @@ The purpose of this lab was to create a music playing robotic "band." This was d
 
 # Methods
 
+![schematic](https://user-images.githubusercontent.com/36172219/35955709-f19cb0a8-0c45-11e8-80e0-d800c075a4f3.png)
+
 
